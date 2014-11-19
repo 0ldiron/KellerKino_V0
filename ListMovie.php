@@ -1,19 +1,30 @@
 <?php
-echo "movie";
-#$db = new SQLite3('MyVideos78.db');
-#$res = $db->query('SELECT * FROM genre ORDER BY strGenre');
-#while($row = $res->fetchArray(SQLITE3_ASSOC))
-#{
-#	print '<li><a href="#" onClick="ListByGenre('.$row['idGenre'].')">'.$row['strGenre'].'</a></li>'."\n\r";
-#} 
-#$db->close();
+echo "ListMovie";
+
+$sql_stmt = false;
 if ($_POST['idGenre'] <> '')
 {
-	echo ' genre('.$_POST['idGenre'].')';
+	echo ' genre('.$_POST['idGenre'].'): ';
+	$sql_stmt = 'SELECT * FROM movie JOIN genrelinkmovie ON genrelinkmovie.idMovie = movie.idMovie WHERE genrelinkmovie.idGenre='.$_POST['idGenre'];
+}
+elseif ($_POST['idTag'] <> '')
+{
+	echo ' tag('.$_POST['idTag'].'): ';
+	$sql_stmt = 'SELECT * FROM movie JOIN taglinks ON taglinks.idMedia = movie.idMovie WHERE taglinks.idTag='.$_POST['idTag'];
+}
+elseif ($_POST['cTitle'] <> '')
+{
+	echo ' title ('.$_POST['cTitle'].'): ';
+	$sql_stmt = 'SELECT * FROM movie WHERE c00 LIKE \''.$_POST['cTitle'].'%\' ORDER BY c00';;
+}
+if ($sql_stmt)
+{
+	echo $sql_stmt;
+	
 	echo '<TABLE>';
 
 	$db = new SQLite3('MyVideos78.db');
-	$res = $db->query('SELECT * FROM movie JOIN genrelinkmovie ON genrelinkmovie.idMovie = movie.idMovie WHERE genrelinkmovie.idGenre='.$_POST['idGenre']);
+	$res = $db->query($sql_stmt);
 	while($row = $res->fetchArray(SQLITE3_ASSOC))
 	{
 		if ($gray)
@@ -54,8 +65,8 @@ if ($_POST['idGenre'] <> '')
 		echo '<B>'.$row['c00'].' ('.$row['c07'].')</B>';
 		echo '<TABLE>';
 		echo '<TR><TD>Rating:</TD><TD>'.substr($row['c05'],0,3).'</TD></TR>';	# imdbRating
-#		echo '<TR><TD>Genre:</TD><TD>'.$row['genres'].'</TD></TR>';
-#		echo '<TR><TD>Director:</TD><TD>'.$row['director'].'</TD></TR>';
+		echo '<TR><TD>Genre:</TD><TD>'.$row['c14'].'</TD></TR>';	# genres
+		echo '<TR><TD>Director:</TD><TD>'.$row['c15'].'</TD></TR>';
 #		echo '<TR><TD>Actors:</TD><TD>'.$row['actors'].'</TD></TR>';
 		echo '</TABLE>';
 		echo $row['c01'];	#	overview
@@ -63,5 +74,6 @@ if ($_POST['idGenre'] <> '')
 	}
 	$db->close();
 
-	echo '</TABLE>';}
+	echo '</TABLE>';
+}
 ?>
