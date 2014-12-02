@@ -7,16 +7,16 @@
 
 	if ($_POST['id'] <> '')
 	{
-		echo 'ID: '.$_POST['id'];
+#		echo 'ID: '.$_POST['id'];
 		$tmdb_V3 = new TMDBv3($apikey,'de');
 		$omdb_V1 = new OMDBv1();
 		
-		echo "DETALLES DE PELICULA";
+#		echo "DETALLES DE PELICULA";
 		$tm_info = $tmdb_V3->movieDetail($_POST['id']);
 		$om_info = $omdb_V1->movieDetail($tm_info['imdb_id']);
 		
-		echo"<pre>";print_r($tm_info);echo"</pre>";
-		echo"<pre>";print_r($om_info);echo"</pre>";
+#		echo"<pre>";print_r($tm_info);echo"</pre>";
+#		echo"<pre>";print_r($om_info);echo"</pre>";
 		
 		$str_genres = "";
 		foreach ($tm_info['genres'] as $g)
@@ -24,7 +24,7 @@
 			if (empty($str_genres)) $str_genres = $g['name'];
 			else $str_genres .= ' | '.$g['name'];
 		}
-		echo"<pre>";print_r($str_genres);echo"</pre>";
+#		echo"<pre>";print_r($str_genres);echo"</pre>";
 
 		$db = new SQLite3('videoworld.sqlite');
 		
@@ -42,7 +42,15 @@
 		$stmt->bindParam(11, $om_info['Actors']);
 		$stmt->bindParam(12, $om_info['Director']);
 		$rc = $stmt->execute();
-		echo"<pre>";print_r($rc);echo"</pre>";
+		if ($rc)
+		{
+			print '<b>'.$tm_info['title'].'</b> added';
+		}
+		else
+		{
+			print '<b>Error</b>';
+		}
+#		echo"<pre>";print_r($rc);echo"</pre>";
 		$db->close();
 	}
 ?>

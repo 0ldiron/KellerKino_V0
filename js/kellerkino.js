@@ -45,18 +45,22 @@ function SetNavigation2(data,status,xhr)
 		$("#spinner").show();
 		$.post("ListVideoWorld.php",{cStatus:$(this).text()},SetContent);
 	});
-	$("#bTitle").click(function(){
-		alert("bTitle");
+	$("#bTSearch").click(function(){
+		$("#spinner").show();
+		$.post("SearchTMDB.php",{cTitle:$("#cTSearch").val()},SetContent);
 	});
-	$("#cTitle").click(function(){
-		alert("cTitle");
-	});
+//	$("#cTSearch").click(function(){
+//	});
 }
 
 function SetContent(data,status,xhr)
 {
 	$('#content').html(data);
 	$("#spinner").hide();
+	$(".cAdd").click(function(){
+		$("#spinner").show();
+		$.post("InsertMovie.php",{id:$(this).data("id")},SetContent);
+	});
 }
 
 $(document).ready(function(){
