@@ -25,6 +25,7 @@
 				<ul id ="mTMDB">
 					<li id="mTNew"   >New</li>
 					<li id="mTStatus">Status</li>
+					<li id="mTRating">Rating</li>
 					<li id="mTUpdate">Update</li>
 				</ul>
 				<ul id ="mXBMC">

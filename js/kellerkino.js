@@ -43,7 +43,13 @@ function SetNavigation2(data,status,xhr)
 		$("#mTStatus").text($(this).text());
 		$("#header2").hide();
 		$("#spinner").show();
-		$.post("ListVideoWorld.php",{cStatus:$(this).text()},SetContent);
+		$.post("ListVideo.php",{idStatus:$(this).data("status")},SetContent);
+	});
+	$(".cRating").click(function(){
+		$("#mTRating").text($(this).text());
+		$("#header2").hide();
+		$("#spinner").show();
+		$.post("ListVideo.php",{idRating:$(this).data("rating")},SetContent);
 	});
 	$("#bTSearch").click(function(){
 		$("#spinner").show();
@@ -81,27 +87,31 @@ $(document).ready(function(){
 		$('#content').empty();
 	});
 	$("#mXDate").click(function(){
-		$.post("ListDate.php",{},SetNavigation2);
+		$.post("MenuDate.php",{},SetNavigation2);
 		ResetMenu();
 	});
 	$("#mXTitle").click(function(){
-		$.post("ListAlpha.php",{},SetNavigation2);
+		$.post("MenuAlpha.php",{},SetNavigation2);
 		ResetMenu();
 	});
 	$("#mXGenre").click(function(){
-		$.post("ListGenre.php",{},SetNavigation2);
+		$.post("MenuGenre.php",{},SetNavigation2);
 		ResetMenu();
 	});
 	$("#mXTag").click(function(){
-		$.post("ListTag.php",{},SetNavigation2);
+		$.post("MenuTag.php",{},SetNavigation2);
 		ResetMenu();
 	});
 	$("#mTStatus").click(function(){
-		$.post("ListStatus.php",{},SetNavigation2);
+		$.post("MenuStatus.php",{},SetNavigation2);
+		ResetMenu();
+	});
+	$("#mTRating").click(function(){
+		$.post("MenuRating.php",{},SetNavigation2);
 		ResetMenu();
 	});
 	$("#mTNew").click(function(){
-		$.post("ListNew.php",{},SetNavigation2);
+		$.post("MenuNew.php",{},SetNavigation2);
 		ResetMenu();
 	});
 	$("#vXBMC").click();
