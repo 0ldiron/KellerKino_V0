@@ -1,3 +1,17 @@
+function SetDetail(data,status,xhr)
+{
+	$(".detail").each(function(){
+		if ($(this).data("id") == data.id)
+		{
+			$(this).find("#Rating").text(data.Rating);
+			$(this).find("#Genre").text(data.Genre);
+			$(this).find("#Director").text(data.Director);
+			$(this).find("#Actors").text(data.Actors);
+			$(this).find("#Plot").text(data.Plot);
+		}
+	});
+}
+
 function ResetMenu()
 {
           // <li id="mTNew"   >New</li>
@@ -66,7 +80,21 @@ function SetContent(data,status,xhr)
 	$(".cAdd").click(function(){
 		$("#spinner").show();
 		$.post("InsertMovie.php",{id:$(this).data("id")},SetContent);
+		$(this).addClass('cActive');
 	});
+	$(".cUpd").click(function(){
+		$("#spinner").show();
+		$.post("UpdateStatus.php",{id:$(this).data("id"),idStatus:$(this).data("state")},CheckResult);
+		$(this).parent().children(".cUpd").each(function(){$(this).removeClass('cActive')});
+		if ($(this).data("state")) $(this).addClass('cActive');
+	});
+}
+
+function CheckResult(data,status,xhr)
+{
+	$("#spinner").hide();
+	if (data != "") alert(data);
+//	$('#content').append('<script>console.log("'+data+'")</script>');
 }
 
 $(document).ready(function(){

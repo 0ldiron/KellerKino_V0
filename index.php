@@ -4,6 +4,7 @@
 	<title>Kellerkino</title>
 	<meta content="EN" http-equiv="Content-Language"></meta>
 	<link type="text/css" rel="stylesheet" href="css/core.css?1.3.57"></link>
+	<link type="text/css" rel="stylesheet" href="css/kellerkino.css?1.3.57"></link>
 	<link type="text/css" media="only screen and (max-device-width: 1024px)" rel="stylesheet" href="css/ipad.css?1.0.5"></link>
 	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 

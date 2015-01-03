@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movie Details Test</title>
+	<script src="js/my_jquery.min.js"></script>
+	<script>	
+	
+	function SetDetail(data,status,xhr)
+	{
+	
+		$(".detail").each(function(){
+			if ($(this).data("id") == data.id)
+			{
+				$(this).find("#Rating").text(data.Rating);
+				$(this).find("#Genre").text(data.Genre);
+				$(this).find("#Director").text(data.Director);
+				$(this).find("#Actors").text(data.Actors);
+				$(this).find("#Plot").text(data.Plot);
+			}
+		});
+
+	}
+	
+	$(document).ready(function(){
+		$("#Button1").click(function(){
+		$.getJSON("MovieDetail.php",{id:111},SetDetail);
+		});
+
+	});
+	</script>	
+</head>
+<body>
+    <p>MovieDetail.php<BR>
+	id:<input type="text" name="id" value="111">
+	<input type="submit" id="Button1"/></p>
+
+	<div class="detail" data-id="110">
+	<TABLE>
+	<TR><TD>Rating:</TD>  <TD id="Rating">'.$om_info['imdbRating'].'</TD></TR>
+	<TR><TD>Genre:</TD>   <TD id="Genre">'.$om_info['Genre'].'</TD></TR>
+	<TR><TD>Director:</TD><TD id="Director">'.$om_info['Director'].'</TD></TR>
+	<TR><TD>Actors:</TD>  <TD id="Actors">'.$om_info['Actors'].'</TD></TR>
+	</TABLE>
+	<text id="Plot">111</text>
+	</div>
+	<hr>
+	<div class="detail" data-id="111">
+	<TABLE>
+	<TR><TD>Rating:</TD>  <TD id="Rating">'.$om_info['imdbRating'].'</TD></TR>
+	<TR><TD>Genre:</TD>   <TD id="Genre">'.$om_info['Genre'].'</TD></TR>
+	<TR><TD>Director:</TD><TD id="Director">'.$om_info['Director'].'</TD></TR>
+	<TR><TD>Actors:</TD>  <TD id="Actors">'.$om_info['Actors'].'</TD></TR>
+	</TABLE>
+	<text id="Plot">111</text>
+	</div>
+</body>
+</html>

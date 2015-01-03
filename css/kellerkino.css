@@ -1,0 +1,77 @@
+.cAdd
+{
+	position:absolute;
+	width:32px; 
+	height: 32px;
+	border:0px;
+	bottom:6px;
+	right:6px;
+}
+
+.cUpd
+{
+	position:absolute;
+	width:32px; 
+	height: 32px;
+	border:0px;
+	bottom:6px;
+	right:6px;
+}
+
+.cActive,
+.cAdd:hover,
+.cUpd:hover
+{
+	background-color:blue;
+}
+
+div.divTST {
+/*    margin: 5px; */
+    margin: 0px;
+    padding: 5px;
+/*    border: 1px solid #0000ff; */
+    border: 0px;
+    height: 320px;
+    width: 207px;
+    float: left;
+    text-align: center;
+	position: relative;
+}
+
+div.divTST img.cover {
+    display: inline;
+    margin: 5px;
+    border: 1px solid #ffffff;
+	width:  185px;
+	height: 278px;
+}
+
+div.divTST img.cInfo
+{
+	position:absolute;
+	width:32px; 
+	height: 32px;
+	border:0px;
+	top:255px;
+	left:168px;
+	background: url(/images/status_2.png) no-repeat;	
+	background-color:blue;
+}
+
+
+
+div.divTST:hover {
+	background: #aeaeae;
+	}
+
+div.desc {
+	font-size: 12px;
+	font-weight: 700;
+	color: #000;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	width: 185px;
+	white-space: nowrap;
+	overflow: hidden;
+	}

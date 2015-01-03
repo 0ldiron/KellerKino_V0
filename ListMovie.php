@@ -5,7 +5,7 @@ $sql_stmt = false;
 if ($_POST['idGenre'] <> '')
 {
 	echo ' genre('.$_POST['idGenre'].'): ';
-	$sql_stmt = 'SELECT * FROM movie JOIN genrelinkmovie ON genrelinkmovie.idMovie = movie.idMovie WHERE genrelinkmovie.idGenre='.$_POST['idGenre'];
+	$sql_stmt = 'SELECT movie.*, files.lastPlayed AS lastPlayed FROM movie JOIN genrelinkmovie ON genrelinkmovie.idMovie = movie.idMovie JOIN files ON files.idFile=movie.idFile WHERE genrelinkmovie.idGenre='.$_POST['idGenre'];
 }
 elseif ($_POST['idTag'] <> '')
 {
@@ -95,9 +95,9 @@ if ($sql_stmt)
 		while($row = $res->fetchArray(SQLITE3_ASSOC))
 		{
 			$title = $row['c00'];
-			if (strlen($title) > 18 && !(strlen($title) <= 21))
+			if (strlen($title) > 23 && !(strlen($title) <= 26))
 			{
-				$title = substr($title, 0, 18)."...";
+				$title = substr($title, 0, 23)."...";
 			}
 			
 			$first = strpos($row['c08'],"preview=");
@@ -119,16 +119,22 @@ if ($sql_stmt)
 				}
 			}
 
-			print '<div class="floatableMovieCover">';
-			print '<div class="imgWrapper">';
-			print '<div class="inner">';
-			print "<img alt=\"".$title."\" src=".$cover."></img>";
-			print "</div>"; # inner
-			print "</div>"; # imgWrapper
-			print "<p class=\"album\" title=\"".$title."\">";
-			print $title;
-			print "</p>";
-			print "</div>"; # floatableMovieCover
+#			print '<div class="floatableMovieCover">';
+#			print '<div class="imgWrapper">';
+#			print '<div class="inner">';
+#			print "<img alt=\"".$title."\" src=".$cover."></img>";
+#			print "</div>"; # inner
+#			print "</div>"; # imgWrapper
+#			print "<p class=\"album\" title=\"".$title."\">";
+#			print $title;
+#			print "</p>";
+#			print "</div>"; # floatableMovieCover
+			print '<div class="divTST">';
+			$cover = str_replace('/w500/','/w185/',$cover);
+			print "<img class=\"cover\" alt=\"".$title."\" src=".$cover."></img>";
+			if ($row['lastPlayed']) print '<img class="cInfo">';
+			print '<div class="desc">'.$title.'</div>';
+			print '</div>';
 		} 
 		print "</div>";
 	}

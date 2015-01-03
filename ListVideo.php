@@ -31,10 +31,25 @@ if (1)
 			$gray = true;
 		}
 	#	$tmdb_V3->getImageURL("w185"): 	http://image.tmdb.org/t/p/w185
-		echo '<TD><img src="http://image.tmdb.org/t/p/w185'.$row['poster_path'].'" height="278" width="185"></TD>';
+		$s1= ""; $s2= ""; $s3= "";
+		switch ($row['status'])
+		{
+			case 1: $s1=" cActive"; break;
+			case 2: $s2=" cActive"; break;
+			case 3: $s3=" cActive"; break;
+		}
 		echo '<TD>';
-		echo '<button data-id="'.$row['lfdnr'].'">0</button>';
-		echo '<button>1</button><button>2</button><button>3</button>';
+		print '<div style="position:relative">';
+		print '<img src="http://image.tmdb.org/t/p/w185'.$row['poster_path'].'" height="278" width="185">';
+		print '<img class="cUpd" data-id="'.$row['lfdnr'].'" data-state="0" src="images/status_0.png" style="right:108px;">';
+		print '<img class="cUpd'.$s1.'" data-id="'.$row['lfdnr'].'" data-state="1" src="images/status_1.png" style="right:74px;">';
+		print '<img class="cUpd'.$s3.'" data-id="'.$row['lfdnr'].'" data-state="3" src="images/status_3.png" style="right:40px;">';
+		print '<img class="cUpd'.$s2.'" data-id="'.$row['lfdnr'].'" data-state="2" src="images/status_2.png" style="right:6px;">';
+
+		print '</div>';
+		print '</TD>';
+
+		echo '<TD>';
 		echo '<B>'.$row['title'].' ('.substr($row['release_date'],0,4).')</B>';
 		echo '<TABLE>';
 		echo '<TR><TD>Rating:</TD><TD>'.$row['imdbRating'].'</TD></TR>';

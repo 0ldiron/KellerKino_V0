@@ -10,7 +10,7 @@
 		$rc = $stmt->execute();
 		if ($rc)
 		{
-			print '<b>'.$_POST['id'].'</b> updated';
+			print 'id('.$_POST['id'].') updated';
 		}
 		else
 		{
