@@ -118,14 +118,14 @@ $(document).ready(function(){
 		$(this).toggleClass('selected');
 		if ($(this).hasClass('selected'))
 		{
-			$('.divTST').width('100%').height('300px');
+			$('.divTST').width('100%').height('290px');
 			$('.desc').hide();
-			$('.divDetail').show();
+			$('.movieDetail').show();
 		}
 		else
 		{
 			$('.divTST').width('207px').height('320px');
-			$('.divDetail').hide();
+			$('.movieDetail').hide();
 			$('.desc').show();
 		}
 	});

@@ -1,30 +1,23 @@
 <?php
-echo "ListMovie";
-
 $sql_stmt = false;
 if ($_POST['idGenre'] <> '')
 {
-	echo ' genre('.$_POST['idGenre'].'): ';
 	$sql_stmt = 'SELECT movie.*, files.lastPlayed AS lastPlayed FROM movie JOIN genrelinkmovie ON genrelinkmovie.idMovie = movie.idMovie JOIN files ON files.idFile=movie.idFile WHERE genrelinkmovie.idGenre='.$_POST['idGenre'];
 }
 elseif ($_POST['idTag'] <> '')
 {
-	echo ' tag('.$_POST['idTag'].'): ';
 	$sql_stmt = 'SELECT * FROM movie JOIN taglinks ON taglinks.idMedia = movie.idMovie WHERE taglinks.idTag='.$_POST['idTag'];
 }
 elseif ($_POST['cTitle'] <> '')
 {
-	echo ' title ('.$_POST['cTitle'].'): ';
 	$sql_stmt = 'SELECT * FROM movie WHERE c00 LIKE \''.$_POST['cTitle'].'%\' ORDER BY c00';;
 }
 elseif (strcasecmp($_POST['cDate'],'Played') == 0)
 {
-	echo ' date ('.$_POST['cDate'].'): ';
 	$sql_stmt = 'SELECT * FROM movieview ORDER BY lastPlayed DESC';;
 }
 elseif (strcasecmp($_POST['cDate'],'Added') == 0)
 {
-	echo ' date ('.$_POST['cDate'].'): ';
 	$sql_stmt = 'SELECT * FROM movieview ORDER BY dateAdded DESC';;
 }
 
@@ -40,7 +33,7 @@ if ($sql_stmt)
 	while($row = $res->fetchArray(SQLITE3_ASSOC))
 	{
 		$title = $row['c00'];
-		if (strlen($title) > 23 && !(strlen($title) <= 26))
+		if (strlen($title) > 26)
 		{
 			$title = substr($title, 0, 23)."...";
 		}
@@ -66,11 +59,16 @@ if ($sql_stmt)
 
 		print '<div class="divTST">';
 		$cover = str_replace('/w500/','/w185/',$cover);
+		
+		print '<div class="moviePoster">';
+		
 		print "<img class=\"cover\" alt=\"".$title."\" src=".$cover."></img>";
 		if ($row['lastPlayed']) print '<img class="cInfo">';
 		print '<div class="desc">'.$title.'</div>';
 
-		print '<div class="divDetail">';
+		print '</div>';
+		
+		print '<div class="movieDetail">';
 		echo '<B>'.$row['c00'].' ('.$row['c07'].')</B>';
 		echo '<TABLE>';
 		echo '<TR><TD>Rating:</TD><TD>'.substr($row['c05'],0,3).'</TD></TR>';	# imdbRating
