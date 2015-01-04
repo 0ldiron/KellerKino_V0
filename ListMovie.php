@@ -30,114 +30,61 @@ elseif (strcasecmp($_POST['cDate'],'Added') == 0)
 
 if ($sql_stmt)
 {
-	echo $sql_stmt;
-	
+	#DEBUG#
+	print '<script>console.log("'.$sql_stmt.'")</script>';
 
 	$db = new SQLite3('MyVideos78.db');
 	$res = $db->query($sql_stmt);
 	
-	if (0)
+	print '<div id="movieLibraryContainer" class="contentContainer">';
+	while($row = $res->fetchArray(SQLITE3_ASSOC))
 	{
-		echo '<TABLE>';
-		while($row = $res->fetchArray(SQLITE3_ASSOC))
+		$title = $row['c00'];
+		if (strlen($title) > 23 && !(strlen($title) <= 26))
 		{
-			if ($gray)
-			{
-				echo '<TR BGCOLOR="LIGHTGRAY">';
-				$gray = false;
-			}
-			else
-			{
-				echo '<TR>';
-				$gray = true;
-			}
-
-			$first = strpos($row['c08'],"preview=");
-			if ($first === false)
-			{
-				$cover = "images/DefaultVideo.png";
-			}
-			else
-			{
-				$first+=8;
-				$last  = strpos($row['c08'],">",$first);
-				if ($last === false)
-				{
-					$cover = substr($row['c08'], $first);
-				}
-				else
-				{
-					$cover = substr($row['c08'], $first, $last-$first);
-				}
-				$cover = str_replace('/w500/','/w185/',$cover);
-			}
-			
-			
-			echo '<TD><img src='.$cover.' height="278" width="185"></TD>';
-	#		echo '<TD>'.$cover.'</TD>';
-			echo '<TD>';
-			echo '<B>'.$row['c00'].' ('.$row['c07'].')</B>';
-			echo '<TABLE>';
-			echo '<TR><TD>Rating:</TD><TD>'.substr($row['c05'],0,3).'</TD></TR>';	# imdbRating
-			echo '<TR><TD>Genre:</TD><TD>'.$row['c14'].'</TD></TR>';	# genres
-			echo '<TR><TD>Director:</TD><TD>'.$row['c15'].'</TD></TR>';
-	#		echo '<TR><TD>Actors:</TD><TD>'.$row['actors'].'</TD></TR>';
-			echo '</TABLE>';
-			echo $row['c01'];	#	overview
-			echo "</TD></TR>\n";
+			$title = substr($title, 0, 23)."...";
 		}
-		echo '</TABLE>';
-	}
-	else
-	{
-	
-		print '<div id="movieLibraryContainer" class="contentContainer">';
-		while($row = $res->fetchArray(SQLITE3_ASSOC))
+		
+		$first = strpos($row['c08'],"preview=");
+		if ($first === false)
 		{
-			$title = $row['c00'];
-			if (strlen($title) > 23 && !(strlen($title) <= 26))
+			$cover = "images/DefaultVideo.png";
+		}
+		else
+		{
+			$first+=8;
+			$last  = strpos($row['c08'],">",$first);
+			if ($last === false)
 			{
-				$title = substr($title, 0, 23)."...";
-			}
-			
-			$first = strpos($row['c08'],"preview=");
-			if ($first === false)
-			{
-				$cover = "images/DefaultVideo.png";
+				$cover = substr($row['c08'], $first);
 			}
 			else
 			{
-				$first+=8;
-				$last  = strpos($row['c08'],">",$first);
-				if ($last === false)
-				{
-					$cover = substr($row['c08'], $first);
-				}
-				else
-				{
-					$cover = substr($row['c08'], $first, $last-$first);
-				}
+				$cover = substr($row['c08'], $first, $last-$first);
 			}
+		}
 
-#			print '<div class="floatableMovieCover">';
-#			print '<div class="imgWrapper">';
-#			print '<div class="inner">';
-#			print "<img alt=\"".$title."\" src=".$cover."></img>";
-#			print "</div>"; # inner
-#			print "</div>"; # imgWrapper
-#			print "<p class=\"album\" title=\"".$title."\">";
-#			print $title;
-#			print "</p>";
-#			print "</div>"; # floatableMovieCover
-			print '<div class="divTST">';
-			$cover = str_replace('/w500/','/w185/',$cover);
-			print "<img class=\"cover\" alt=\"".$title."\" src=".$cover."></img>";
-			if ($row['lastPlayed']) print '<img class="cInfo">';
-			print '<div class="desc">'.$title.'</div>';
-			print '</div>';
-		} 
-		print "</div>";
-	}
+		print '<div class="divTST">';
+		$cover = str_replace('/w500/','/w185/',$cover);
+		print "<img class=\"cover\" alt=\"".$title."\" src=".$cover."></img>";
+		if ($row['lastPlayed']) print '<img class="cInfo">';
+		print '<div class="desc">'.$title.'</div>';
+
+		print '<div class="divDetail">';
+		echo '<B>'.$row['c00'].' ('.$row['c07'].')</B>';
+		echo '<TABLE>';
+		echo '<TR><TD>Rating:</TD><TD>'.substr($row['c05'],0,3).'</TD></TR>';	# imdbRating
+		echo '<TR><TD>Genre:</TD><TD>'.$row['c14'].'</TD></TR>';	# genres
+		echo '<TR><TD>Director:</TD><TD>'.$row['c15'].'</TD></TR>';
+#		echo '<TR><TD>Actors:</TD><TD>'.$row['actors'].'</TD></TR>';
+		echo '</TABLE>';
+		echo $row['c01'];	#	overview
+		print '</div>';
+		
+		
+		print '</div>';
+	} 
+	print "</div>";
 	$db->close();
 }
 ?>

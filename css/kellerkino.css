@@ -34,7 +34,7 @@ div.divTST {
     height: 320px;
     width: 207px;
     float: left;
-    text-align: center;
+/*    text-align: center; */
 	position: relative;
 }
 
@@ -75,3 +75,11 @@ div.desc {
 	white-space: nowrap;
 	overflow: hidden;
 	}
+
+div .divDetail
+{
+	display: none;
+	position: relative;
+	top: -290px;
+	left: 207px;
+}

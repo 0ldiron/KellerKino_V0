@@ -21,6 +21,7 @@
 			<ul>
 				<li id="vXBMC">XBMC</li>
 				<li id="vTMDB">TMDB</li>
+				<li id="vDetail">Detail</li>
 			</ul>
 			<div style="float: right;">
 				<ul id ="mTMDB">

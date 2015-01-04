@@ -114,6 +114,21 @@ $(document).ready(function(){
 		$('#navigation2').empty();
 		$('#content').empty();
 	});
+	$("#vDetail").click(function(){
+		$(this).toggleClass('selected');
+		if ($(this).hasClass('selected'))
+		{
+			$('.divTST').width('100%').height('300px');
+			$('.desc').hide();
+			$('.divDetail').show();
+		}
+		else
+		{
+			$('.divTST').width('207px').height('320px');
+			$('.divDetail').hide();
+			$('.desc').show();
+		}
+	});
 	$("#mXDate").click(function(){
 		$.post("MenuDate.php",{},SetNavigation2);
 		ResetMenu();
