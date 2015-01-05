@@ -6,11 +6,11 @@ if ($_POST['idGenre'] <> '')
 }
 elseif ($_POST['idTag'] <> '')
 {
-	$sql_stmt = 'SELECT * FROM movie JOIN taglinks ON taglinks.idMedia = movie.idMovie WHERE taglinks.idTag='.$_POST['idTag'];
+	$sql_stmt = 'SELECT movie.*, files.lastPlayed AS lastPlayed FROM movie JOIN taglinks ON taglinks.idMedia = movie.idMovie JOIN files ON files.idFile=movie.idFile WHERE taglinks.idTag='.$_POST['idTag'];
 }
 elseif ($_POST['cTitle'] <> '')
 {
-	$sql_stmt = 'SELECT * FROM movie WHERE c00 LIKE \''.$_POST['cTitle'].'%\' ORDER BY c00';;
+	$sql_stmt = 'SELECT movie.*, files.lastPlayed AS lastPlayed FROM movie JOIN files ON files.idFile=movie.idFile WHERE c00 LIKE \''.$_POST['cTitle'].'%\' ORDER BY c00';;
 }
 elseif (strcasecmp($_POST['cDate'],'Played') == 0)
 {
@@ -62,11 +62,11 @@ if ($sql_stmt)
 		
 		print '<div class="moviePoster">';
 		
-		print "<img class=\"cover\" alt=\"".$title."\" src=".$cover."></img>";
-		if ($row['lastPlayed']) print '<img class="cInfo">';
+		print "<img class=\"cover\" alt=\"".$title."\" src=".$cover.">";
+		if ($row['lastPlayed']) print '<div class="movieIcon"><img class="cInfo"><img class="cInfo" src="/images/status_2.png"></div>';
 		print '<div class="desc">'.$title.'</div>';
 
-		print '</div>';
+		print '</div>'; # moviePoster
 		
 		print '<div class="movieDetail">';
 		echo '<B>'.$row['c00'].' ('.$row['c07'].')</B>';
@@ -77,12 +77,10 @@ if ($sql_stmt)
 #		echo '<TR><TD>Actors:</TD><TD>'.$row['actors'].'</TD></TR>';
 		echo '</TABLE>';
 		echo $row['c01'];	#	overview
-		print '</div>';
-		
-		
-		print '</div>';
+		print '</div>'; # movieDetail
+		print '</div>'; # divTST
 	} 
-	print "</div>";
+	print "</div>"; # contentContainer
 	$db->close();
 }
 ?>

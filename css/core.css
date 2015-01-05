@@ -790,32 +790,3 @@ div.imgWrapper div.inner {
 .tvshowContainer .showDetails span.heading {
 	font-weight: 700;
 	}
-
-.searchbutton {
-    background-color: #4D90FE;
-    border: 0px none;
-    border-radius: 0px 2px 2px 0px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-    height: 32px;
-#    left: 400px;
-#    position: absolute;
-    text-align: center;
-    top: 0px;
-    vertical-align: top;
-    width: 72px;
-    z-index: -1;
-    margin-left: 0px;
-}
-
-.searchbutton:hover {
-    background-color: #357AE8;
-}
-	
-.searchbutton:before {
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAABVUlEQVRYw+2YQRGEMAxFkVAJlYAEJCABCUhAQiWshJWABCRUAg7+XsrMTkibNDBdDvtnek0fSfqToQPQPeE8AuK5IDkBGAC8AESctQEIAHxXKTUIgB7ACr0CAHcrCIAJNm0A+ltALkAc2jWlKoKkcnCKCdCR0i3p4lNmroJwPRGEgC6VhGo2gaTXUQUhwEQryKsmUOaZU40WEOoTk8Eb3iTGYgGhcgaQmcRYL4N0BjHl+RnIeDuI1iFJ8EBivC0gm7bRCsGj1ktKIIGx6pohNjNZ9RYQnxliTgHRM1a/XrH4kIEZhEzstT0mgeTmBpJZzemJjgk65naTO9aAPvOFtavAWMqKdjHyhcxIW9quGRVVO2uh/lTr8fWMqbEw1cvzV/AlXXico2c884IgwZhADMY2STBNQDQwzUAkmKYgAoxvClKAGZqDMDBb89IwRjlI0/f/W+ID3tQLQPib2qQAAAAASUVORK5CYII=') repeat scroll 0% 0% / 17px auto transparent;
-    content: "";
-    display: block;
-    height: 17px;
-    margin: 0px auto;
-    width: 17px;
-}

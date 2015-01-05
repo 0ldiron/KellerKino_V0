@@ -1,6 +1,6 @@
 function SetDetail(data,status,xhr)
 {
-	$(".detail").each(function(){
+	$(".movieDetail").each(function(){
 		if ($(this).data("id") == data.id)
 		{
 			$(this).find("#Rating").text(data.Rating);
@@ -65,17 +65,12 @@ function SetNavigation2(data,status,xhr)
 		$("#spinner").show();
 		$.post("ListVideo.php",{idRating:$(this).data("rating")},SetContent);
 	});
-	$("#bTSearch").click(function(){
-		$("#spinner").show();
-		$.post("SearchTMDB.php",{cTitle:$("#cTSearch").val()},SetContent);
-	});
-//	$("#cTSearch").click(function(){
-//	});
 }
 
 function SetContent(data,status,xhr)
 {
 	$('#content').html(data);
+	ToggleDetails();
 	$("#spinner").hide();
 	$(".cAdd").click(function(){
 		$("#spinner").show();
@@ -88,6 +83,15 @@ function SetContent(data,status,xhr)
 		$(this).parent().children(".cUpd").each(function(){$(this).removeClass('cActive')});
 		if ($(this).data("state")) $(this).addClass('cActive');
 	});
+	$("#bTSearch").click(function(){
+		$("#spinner").show();
+		$.post("SearchTMDB.php",{cTitle:$("#cTSearch").val()},SetContent);
+	});
+    $('#cTSearch').keyup(function(e) {
+    if (e.keyCode == 13) {
+		$.post("SearchTMDB.php",{cTitle:$(this).val()},SetContent);
+    }
+    });
 }
 
 function CheckResult(data,status,xhr)
@@ -95,6 +99,23 @@ function CheckResult(data,status,xhr)
 	$("#spinner").hide();
 	if (data != "") alert(data);
 //	$('#content').append('<script>console.log("'+data+'")</script>');
+}
+
+function ToggleDetails()
+{
+	if ($('#vDetail').hasClass('selected'))
+
+	{
+		$('.divTST').width('100%').height('290px');
+		$('.desc').hide();
+		$('.movieDetail').show();
+	}
+	else
+	{
+		$('.divTST').width('207px').height('320px');
+		$('.movieDetail').hide();
+		$('.desc').show();
+	}
 }
 
 $(document).ready(function(){
@@ -116,18 +137,7 @@ $(document).ready(function(){
 	});
 	$("#vDetail").click(function(){
 		$(this).toggleClass('selected');
-		if ($(this).hasClass('selected'))
-		{
-			$('.divTST').width('100%').height('290px');
-			$('.desc').hide();
-			$('.movieDetail').show();
-		}
-		else
-		{
-			$('.divTST').width('207px').height('320px');
-			$('.movieDetail').hide();
-			$('.desc').show();
-		}
+		ToggleDetails();
 	});
 	$("#mXDate").click(function(){
 		$.post("MenuDate.php",{},SetNavigation2);
@@ -154,7 +164,8 @@ $(document).ready(function(){
 		ResetMenu();
 	});
 	$("#mTNew").click(function(){
-		$.post("MenuNew.php",{},SetNavigation2);
+		$.post("SearchTMDB.php",{},SetContent);
+		$("#header2").hide();
 		ResetMenu();
 	});
 	$("#vXBMC").click();
