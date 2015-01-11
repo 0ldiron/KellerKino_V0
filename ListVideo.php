@@ -33,11 +33,19 @@ while($row = $res->fetchArray(SQLITE3_ASSOC))
 	}
 
 	print '<div class="divTST">';
-	print '<div class="moviePoster">';
-#	$tmdb_V3->getImageURL("w185"): 	http://image.tmdb.org/t/p/w185
-	print '<img class="cover" alt="'.$title.'" src="http://image.tmdb.org/t/p/w185'.$row['poster_path'].'">';
-	print '<div class="movieIcon">';
 
+	print '<div class="moviePoster">';
+	if (empty($row['poster_path']))
+	{
+		echo '<img class="cover" src="images/nocover.png" height="278" width="185">';
+	}
+	else
+	{
+#		$tmdb_V3->getImageURL("w185"): 	http://image.tmdb.org/t/p/w185
+		print '<img class="cover" alt="'.$title.'" src="http://image.tmdb.org/t/p/w185'.$row['poster_path'].'">';
+	}
+
+	print '<div class="movieIcon">';
 	print '<img class="cUpd" data-id="'.$row['lfdnr'].'" data-state="0" src="images/status_0.png">';
 	print '<img class="cUpd'.$s1.'" data-id="'.$row['lfdnr'].'" data-state="1" src="images/status_1.png">';
 	print '<img class="cUpd'.$s3.'" data-id="'.$row['lfdnr'].'" data-state="3" src="images/status_3.png">';

@@ -31,7 +31,16 @@
 			
 			print '<div class="moviePoster">';
 			
-			echo '<img class="cover" src="'.$tmdb_V3->getImageURL("w185").$tm_movie['poster_path'].'" height="278" width="185">';
+			if (empty($tm_movie['poster_path']))
+			{
+				$cover = 'images/nocover.png';
+			}
+			else
+			{
+				$cover = $tmdb_V3->getImageURL("w185").$tm_movie['poster_path'];
+			}
+			
+			echo '<img class="cover" src="'.$cover.'" height="278" width="185">';
 # ALLE BUTTON
 #			echo '<img class="cAdd" data-id="'.$tm_movie['id'].'" data-state="0" src="images/plus.png" border="0" width="32" height="32" style="position:absolute;bottom:6px;right:108px;">';
 #			echo '<img class="cAdd" data-id="'.$tm_movie['id'].'" data-state="1" src="images/status_1.png" border="0" width="32" height="32" style="position:absolute;bottom:6px;right:74px;">';

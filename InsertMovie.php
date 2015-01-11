@@ -42,13 +42,9 @@
 		$stmt->bindParam(11, $om_info['Actors']);
 		$stmt->bindParam(12, $om_info['Director']);
 		$rc = $stmt->execute();
-		if ($rc)
+		if (!$rc)
 		{
-			print '<b>'.$tm_info['title'].'</b> added';
-		}
-		else
-		{
-			print '<b>Error</b>';
+			print 'Error: "'.$tm_info['title'].'" not added!';
 		}
 #		echo"<pre>";print_r($rc);echo"</pre>";
 		$db->close();

@@ -12,56 +12,52 @@ function SetDetail(data,status,xhr)
 	});
 }
 
-function ResetMenu()
+function ResetMenu(item)
 {
-          // <li id="mTNew"   >New</li>
-          // <li id="mTStatus"  >Wish</li>
-          // <li id="mTUpdate">Update</li>
-        // </ul>
-        // <ul id ="mXBMC">
-	$("#mXDate" ).text("Date");
-	$("#mXTitle").text("Title");
-	$("#mXGenre").text("Genre");
-	$("#mXTag"  ).text("Tag");
+	// TMDB	
+	$("#mTNew"   ).text("New").removeClass('selected');
+	$("#mTStatus").text("Status").removeClass('selected');
+	$("#mTRating").text("Rating").removeClass('selected');
+	$("#mTSync"  ).text("Sync").removeClass('selected');
+	// XBMC	
+	$("#mXDate" ).text("Date").removeClass('selected');
+	$("#mXTitle").text("Title").removeClass('selected');
+	$("#mXGenre").text("Genre").removeClass('selected');
+	$("#mXTag"  ).text("Tag").removeClass('selected');
+	item.addClass('selected');
 }
 
-function SetNavigation2(data,status,xhr)
+function SetNavigation(data,status,xhr)
 {
-	$('#navigation2').html(data);
-	$("#header2").show();
+	$('#content').html(data);
+	$("#spinner").hide();
 	$(".cDate").click(function(){
 		$("#mXDate").text($(this).text());
-		$("#header2").hide();
 		$("#spinner").show();
 		$.post("ListMovie.php",{cDate:$(this).text()},SetContent);
 	});
 	$(".cGenre").click(function(){
 		$("#mXGenre").text($(this).text());
-		$("#header2").hide();
 		$("#spinner").show();
 		$.post("ListMovie.php",{idGenre:$(this).data("id")},SetContent);
 	});
 	$(".cTitle").click(function(){
 		$("#mXTitle").text($(this).text());
-		$("#header2").hide();
 		$("#spinner").show();
 		$.post("ListMovie.php",{cTitle:$(this).text()},SetContent);
 	});
 	$(".cTag").click(function(){
 		$("#mXTag").text($(this).text());
-		$("#header2").hide();
 		$("#spinner").show();
 		$.post("ListMovie.php",{idTag:$(this).data("id")},SetContent);
 	});
 	$(".cStatus").click(function(){
 		$("#mTStatus").text($(this).text());
-		$("#header2").hide();
 		$("#spinner").show();
 		$.post("ListVideo.php",{idStatus:$(this).data("status")},SetContent);
 	});
 	$(".cRating").click(function(){
 		$("#mTRating").text($(this).text());
-		$("#header2").hide();
 		$("#spinner").show();
 		$.post("ListVideo.php",{idRating:$(this).data("rating")},SetContent);
 	});
@@ -74,7 +70,7 @@ function SetContent(data,status,xhr)
 	$("#spinner").hide();
 	$(".cAdd").click(function(){
 		$("#spinner").show();
-		$.post("InsertMovie.php",{id:$(this).data("id")},SetContent);
+		$.post("InsertMovie.php",{id:$(this).data("id")},CheckResult);
 		$(this).addClass('cActive');
 	});
 	$(".cUpd").click(function(){
@@ -97,7 +93,7 @@ function SetContent(data,status,xhr)
 function CheckResult(data,status,xhr)
 {
 	$("#spinner").hide();
-	if (data != "") alert(data);
+	if (data != "" && data != null) alert(data);
 //	$('#content').append('<script>console.log("'+data+'")</script>');
 }
 
@@ -124,7 +120,6 @@ $(document).ready(function(){
 		$('#mTMDB').hide();
 		$('#vXBMC').addClass('selected');
 		$('#mXBMC').show();
-		$('#navigation2').empty();
 		$('#content').empty();
 	});
 	$("#vTMDB").click(function(){
@@ -132,7 +127,6 @@ $(document).ready(function(){
 		$('#mXBMC').hide();
 		$('#vTMDB').addClass('selected');
 		$('#mTMDB').show();
-		$('#navigation2').empty();
 		$('#content').empty();
 	});
 	$("#vDetail").click(function(){
@@ -140,33 +134,37 @@ $(document).ready(function(){
 		ToggleDetails();
 	});
 	$("#mXDate").click(function(){
-		$.post("MenuDate.php",{},SetNavigation2);
-		ResetMenu();
+		$.post("MenuDate.php",{},SetNavigation);
+		ResetMenu($(this));
 	});
 	$("#mXTitle").click(function(){
-		$.post("MenuAlpha.php",{},SetNavigation2);
-		ResetMenu();
+		$.post("MenuAlpha.php",{},SetNavigation);
+		ResetMenu($(this));
 	});
 	$("#mXGenre").click(function(){
-		$.post("MenuGenre.php",{},SetNavigation2);
-		ResetMenu();
+		$.post("MenuGenre.php",{},SetNavigation);
+		ResetMenu($(this));
 	});
 	$("#mXTag").click(function(){
-		$.post("MenuTag.php",{},SetNavigation2);
-		ResetMenu();
+		$.post("MenuTag.php",{},SetNavigation);
+		ResetMenu($(this));
 	});
 	$("#mTStatus").click(function(){
-		$.post("MenuStatus.php",{},SetNavigation2);
-		ResetMenu();
+		$.post("MenuStatus.php",{},SetNavigation);
+		ResetMenu($(this));
 	});
 	$("#mTRating").click(function(){
-		$.post("MenuRating.php",{},SetNavigation2);
-		ResetMenu();
+		$.post("MenuRating.php",{},SetNavigation);
+		ResetMenu($(this));
 	});
+	$("#mTSync").click(function(){
+		$.post("SyncStatus.php",{},SetContent);
+		ResetMenu($(this));
+	});
+
 	$("#mTNew").click(function(){
 		$.post("SearchTMDB.php",{},SetContent);
-		$("#header2").hide();
-		ResetMenu();
+		ResetMenu($(this));
 	});
-	$("#vXBMC").click();
+//	$("#vXBMC").click();
 });

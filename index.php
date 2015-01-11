@@ -19,16 +19,16 @@
 		<div id="commsErrorPanel" style="display: none;"></div>
 		<div id="navigation">
 			<ul>
-				<li id="vXBMC">XBMC</li>
+				<li id="vXBMC" class="selected">XBMC</li>
 				<li id="vTMDB">TMDB</li>
 				<li id="vDetail">Detail</li>
 			</ul>
 			<div style="float: right;">
-				<ul id ="mTMDB">
+				<ul id ="mTMDB" style="display: none;">
 					<li id="mTNew"   >New</li>
 					<li id="mTStatus">Status</li>
 					<li id="mTRating">Rating</li>
-					<li id="mTUpdate">Update</li>
+					<li id="mTSync">Sync</li>
 				</ul>
 				<ul id ="mXBMC">
 					<li id="mXDate">Date</li>
@@ -40,14 +40,10 @@
       </div>
       <img src="images/ajax-loader.gif" alt="Loading please wait" id="spinner" style="display: none">
     </div>
-    <div id="header2">
-		<div id="navigation2">
-		</div>
-    </div>
-
-	<div id="body">
 		<div id="content">
+			<div id="start">
+				<img border="0" id="startimg" src="images/vorhang2.jpg">
+			</div>
 		</div> 
-	</div> 
 </body>
 </html>
