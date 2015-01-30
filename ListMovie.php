@@ -74,7 +74,16 @@ if ($sql_stmt)
 		echo '<TR><TD>Rating:</TD><TD>'.substr($row['c05'],0,3).'</TD></TR>';	# imdbRating
 		echo '<TR><TD>Genre:</TD><TD>'.$row['c14'].'</TD></TR>';	# genres
 		echo '<TR><TD>Director:</TD><TD>'.$row['c15'].'</TD></TR>';
-#		echo '<TR><TD>Actors:</TD><TD>'.$row['actors'].'</TD></TR>';
+#	SELECT strActor FROM actors JOIN actorlinkmovie ON actors.idActor = actorlinkmovie.idActor WHERE actorlinkmovie.idMovie = 1 ORDER BY actorlinkmovie.iOrder LIMIT 4 
+		$str_actors = '';
+		$sql_stmt = 'SELECT strActor FROM actors JOIN actorlinkmovie ON actors.idActor = actorlinkmovie.idActor WHERE actorlinkmovie.idMovie = '.$row['idMovie'].' ORDER BY actorlinkmovie.iOrder LIMIT 4';
+		$res2 = $db->query($sql_stmt);
+		while($row2 = $res2->fetchArray(SQLITE3_ASSOC))
+		{
+			if (empty($str_actors)) $str_actors = $row2['strActor'];
+			else $str_actors .= ', '.$row2['strActor'];
+		}
+		echo '<TR><TD>Actors:</TD><TD>'.$str_actors.'</TD></TR>';
 		echo '</TABLE>';
 		echo $row['c01'];	#	overview
 		print '</div>'; # movieDetail
