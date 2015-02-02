@@ -2,12 +2,12 @@
 echo '<div id="navigation">';
 echo '<ul>';
 $db = new SQLite3('MyVideos78.db');
-$res = $db->query('SELECT c00 FROM movie ORDER BY c00');
+$res = $db->query('SELECT c02 FROM movie ORDER BY c02');
 $car_pre = null;
 
 while($row = $res->fetchArray(SQLITE3_ASSOC))
 {
-	$car_new = strtoupper(substr($row['c00'],0,1));
+	$car_new = strtoupper(substr($row['c02'],0,1));
 	if (is_numeric($car_new))
 	{
 		$car_new = '0';
