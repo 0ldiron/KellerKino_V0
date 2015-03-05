@@ -19,11 +19,13 @@ function ResetMenu(item)
 	$("#mTStatus").text("Status").removeClass('selected');
 	$("#mTRating").text("Rating").removeClass('selected');
 	$("#mTSync"  ).text("Sync").removeClass('selected');
+	$("#mTService").removeClass('selected');
 	// XBMC	
 	$("#mXDate" ).text("Date").removeClass('selected');
 	$("#mXTitle").text("Title").removeClass('selected');
 	$("#mXGenre").text("Genre").removeClass('selected');
 	$("#mXTag"  ).text("Tag").removeClass('selected');
+	$("#mXService").removeClass('selected');
 	item.addClass('selected');
 }
 
@@ -61,6 +63,12 @@ function SetNavigation(data,status,xhr)
 		$("#spinner").show();
 		$.post("ListVideo.php",{idRating:$(this).data("rating")},SetContent);
 	});
+	$("#mSViewed").click(function(){
+		window.open("lastPlayed.php", "_blank");
+	});
+	$("#mSIndex").click(function(){
+		window.open("MakeC02.php", "_blank");
+	});
 }
 
 function SetContent(data,status,xhr)
@@ -85,6 +93,7 @@ function SetContent(data,status,xhr)
 	});
     $('#cTSearch').keyup(function(e) {
     if (e.keyCode == 13) {
+		$("#spinner").show();
 		$.post("SearchTMDB.php",{cTitle:$(this).val()},SetContent);
     }
     });
@@ -149,12 +158,20 @@ $(document).ready(function(){
 		$.post("MenuTag.php",{},SetNavigation);
 		ResetMenu($(this));
 	});
+	$("#mXService").click(function(){
+		$.post("MenuService.php",{},SetNavigation);
+		ResetMenu($(this));
+	});
 	$("#mTStatus").click(function(){
 		$.post("MenuStatus.php",{},SetNavigation);
 		ResetMenu($(this));
 	});
 	$("#mTRating").click(function(){
 		$.post("MenuRating.php",{},SetNavigation);
+		ResetMenu($(this));
+	});
+	$("#mTService").click(function(){
+		$.post("MenuService.php",{},SetNavigation);
 		ResetMenu($(this));
 	});
 	$("#mTSync").click(function(){

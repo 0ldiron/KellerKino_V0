@@ -6,7 +6,7 @@
 
 	print '<div id="movieLibraryContainer" class="contentContainer">';
 	echo '<div class="searchMovie">';
-	echo '<input type="text" name="title" placeholder="Titel" size="100" hight="32px" id="cTSearch"/>';
+	echo '<input type="text" name="title" placeholder="Titel" size="100" hight="32px" id="cTSearch" value="'.$_POST['cTitle'].'"/>';
 	echo '<button class="searchbutton" id="bTSearch"/>';
 	echo '</div>';
 	

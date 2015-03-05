@@ -1,3 +1,5 @@
 # Database
 *.db
 *.sqlite
+fonts/*.*
+images_work/*.*

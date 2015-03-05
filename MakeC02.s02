@@ -5,11 +5,7 @@ $res = $db->query('SELECT idMovie,c00 FROM movie');
 
 while($row2 = $res->fetchArray(SQLITE3_ASSOC))
 {
-	$str_c02 = utf8_decode($row2['c00']);
-	$str_c02 = strtr ($str_c02, 'ƒд÷ц№ья', 'AaOoUuS');
-	$str_c02 = strtoupper($str_c02);
-	
-	$worte=explode(" ",$str_c02);
+	$worte=explode(" ",$row2['c00']);
 	if ((strcasecmp($worte[0], "ein" ) == 0) ||
 	   (strcasecmp($worte[0], "eine") == 0) ||
 	   (strcasecmp($worte[0], "der" ) == 0) ||
@@ -21,14 +17,21 @@ while($row2 = $res->fetchArray(SQLITE3_ASSOC))
 	   (strcasecmp($worte[0], "el"  ) == 0) ||
 	   (strcasecmp($worte[0], "la"  ) == 0))
 	{
+//		unset($worte[0]); // erstes Wort wech
 		array_shift($worte); // erstes Wort wech
 	}
-	$c1 = substr($worte[0],0,1);
-	if (ctype_digit($c1)) array_unshift($worte, '#');
-	elseif (ctype_alpha($c1)) array_unshift ($worte, $c1);
-	else array_unshift($worte, '*');
-	$str_c02 = implode(" ",$worte);
-	echo $str_c02,'<BR>';
+	$str_c02 = substr(utf8_decode($worte[0]),0,1);
+echo $str_c02;
+	$str_c02 = strtr ($str_c02, 'ƒд÷ц№ья', 'AaOoUuS');
+echo $str_c02;
+	$str_c02 = strtoupper($str_c02);
+echo $str_c02;
+	
+	if (ctype_digit($str_c02)) $str_c02 = '#';
+	elseif (ctype_alpha($str_c02));
+	else $str_c02='*';
+	
+	echo $str_c02,' ',$row2['c00'],'<BR>';
 
 	$stmt = $db->prepare('UPDATE movie SET c02=? WHERE idMovie=?');
 	$stmt->bindParam( 1, $str_c02);

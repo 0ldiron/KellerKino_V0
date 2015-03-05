@@ -29,12 +29,14 @@
 					<li id="mTStatus">Status</li>
 					<li id="mTRating">Rating</li>
 					<li id="mTSync">Sync</li>
+					<li id="mTService" style="font-family: 'icon-worksregular';">&#245;</li>
 				</ul>
 				<ul id ="mXBMC">
 					<li id="mXDate">Date</li>
 					<li id="mXTitle">Title</li>
 					<li id="mXGenre">Genre</li>
 					<li id="mXTag"  >Tag</li>
+					<li id="mXService" style="font-family: 'icon-worksregular';">&#245;</li>
 				</ul>
 			</div>
       </div>
