@@ -14,7 +14,7 @@
 
 		print '{';
 		print '  "id": "'.$_GET['id'].'",';
-		print '  "Rating": "'.$om_info['imdbRating'].'",';
+		print '  "Rating": "'.$om_info['imdbRating'].' ('.$om_info[imdbVotes].')",';
 		print '  "Genre": "'.$om_info['Genre'].'",';
 		print '  "Director": "'.$om_info['Director'].'",';
 		print '  "Actors": "'.$om_info['Actors'].'",';
