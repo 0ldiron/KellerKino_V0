@@ -102,7 +102,12 @@ function SetContent(data,status,xhr)
 function CheckResult(data,status,xhr)
 {
 	$("#spinner").hide();
-	if (data != "" && data != null) alert(data);
+//	if (data != "" && data != null) alert(data);
+	if (data && data.length>2)
+	{
+		s = "#"+data+"#"+data.length;
+		alert(s);	
+	}
 //	$('#content').append('<script>console.log("'+data+'")</script>');
 }
 
