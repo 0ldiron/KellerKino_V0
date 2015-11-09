@@ -1,6 +1,6 @@
 <?php
 
-$db = new SQLite3('MyVideos78.db');
+$db = new SQLite3('MyVideos93.db');
 $res = $db->query('SELECT idMovie,c00 FROM movie');
 $arr = array();
 
