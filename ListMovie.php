@@ -2,7 +2,7 @@
 $sql_stmt = false;
 if ($_POST['idGenre'] <> '')
 {
-	$sql_stmt = 'SELECT movie.*, files.lastPlayed AS lastPlayed FROM movie JOIN genrelinkmovie ON genrelinkmovie.idMovie = movie.idMovie JOIN files ON files.idFile=movie.idFile WHERE genrelinkmovie.idGenre='.$_POST['idGenre'];
+	$sql_stmt = 'SELECT movie.*, files.lastPlayed AS lastPlayed FROM movie JOIN genre_link ON genre_link.media_id = movie.idMovie JOIN files ON files.idFile=movie.idFile WHERE genre_link.genre_id='.$_POST['idGenre'];
 }
 elseif ($_POST['idTag'] <> '')
 {
@@ -14,11 +14,11 @@ elseif ($_POST['cTitle'] <> '')
 }
 elseif (strcasecmp($_POST['cDate'],'Played') == 0)
 {
-	$sql_stmt = 'SELECT * FROM movieview ORDER BY lastPlayed DESC';;
+	$sql_stmt = 'SELECT * FROM movie_view ORDER BY lastPlayed DESC';;
 }
 elseif (strcasecmp($_POST['cDate'],'Added') == 0)
 {
-	$sql_stmt = 'SELECT * FROM movieview ORDER BY dateAdded DESC';;
+	$sql_stmt = 'SELECT * FROM movie_view ORDER BY dateAdded DESC';;
 }
 
 if ($sql_stmt)
@@ -74,14 +74,13 @@ if ($sql_stmt)
 		echo '<TR><TD>Rating:</TD><TD>'.substr($row['c05'],0,3).'</TD></TR>';	# imdbRating
 		echo '<TR><TD>Genre:</TD><TD>'.$row['c14'].'</TD></TR>';	# genres
 		echo '<TR><TD>Director:</TD><TD>'.$row['c15'].'</TD></TR>';
-#	SELECT strActor FROM actors JOIN actorlinkmovie ON actors.idActor = actorlinkmovie.idActor WHERE actorlinkmovie.idMovie = 1 ORDER BY actorlinkmovie.iOrder LIMIT 4 
 		$str_actors = '';
-		$sql_stmt = 'SELECT strActor FROM actors JOIN actorlinkmovie ON actors.idActor = actorlinkmovie.idActor WHERE actorlinkmovie.idMovie = '.$row['idMovie'].' ORDER BY actorlinkmovie.iOrder LIMIT 4';
+		$sql_stmt = 'SELECT name FROM actor JOIN actor_link ON actor.actor_id = actor_link.actor_id WHERE actor_link.media_id = '.$row['idMovie'].' ORDER BY actor_link.cast_order LIMIT 4';
 		$res2 = $db->query($sql_stmt);
 		while($row2 = $res2->fetchArray(SQLITE3_ASSOC))
 		{
-			if (empty($str_actors)) $str_actors = $row2['strActor'];
-			else $str_actors .= ', '.$row2['strActor'];
+			if (empty($str_actors)) $str_actors = $row2['name'];
+			else $str_actors .= ', '.$row2['name'];
 		}
 		echo '<TR><TD>Actors:</TD><TD>'.$str_actors.'</TD></TR>';
 		echo '</TABLE>';
