@@ -23,9 +23,17 @@
     margin: 1px;
 }
 
+.cDel
+{
+	width: 32px; 
+	height: 32px;
+    margin: 1px;
+}
+
 .cActive,
 .cAdd:hover,
-.cUpd:hover
+.cUpd:hover,
+.cDel:hover
 {
 	background-color:blue;
 }

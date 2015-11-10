@@ -1,6 +1,6 @@
 <?php
 
-function PrintVideos($stmt)
+function PrintVideos($stmt, $mode)
 {
 	$db = new SQLite3('videoworld.sqlite');
 	$res = $db->query($stmt);
@@ -14,14 +14,6 @@ function PrintVideos($stmt)
 			$title = substr($title, 0, 23)."...";
 		}
 		
-		$s1= ""; $s2= ""; $s3= "";
-		switch ($row['status'])
-		{
-			case 1: $s1=" cActive"; break;
-			case 2: $s2=" cActive"; break;
-			case 3: $s3=" cActive"; break;
-		}
-
 		echo '<div class="divTST">';
 
 		echo '<div class="moviePoster">';
@@ -36,11 +28,25 @@ function PrintVideos($stmt)
 		}
 
 		echo '<div class="movieIcon">';
-		echo '<img class="cUpd" data-id="'.$row['lfdnr'].'" data-state="0" src="images/status_0.png">';
-		echo '<img class="cUpd'.$s1.'" data-id="'.$row['lfdnr'].'" data-state="1" src="images/status_1.png">';
-		echo '<img class="cUpd'.$s3.'" data-id="'.$row['lfdnr'].'" data-state="3" src="images/status_3.png">';
-		echo '<img class="cUpd'.$s2.'" data-id="'.$row['lfdnr'].'" data-state="2" src="images/status_2.png">';
+		if ($mode == 1)
+		{
+			$s1= ""; $s2= ""; $s3= "";
+			switch ($row['status'])
+			{
+				case 1: $s1=" cActive"; break;
+				case 2: $s2=" cActive"; break;
+				case 3: $s3=" cActive"; break;
+			}
 
+			echo '<img class="cUpd" data-id="'.$row['lfdnr'].'" data-state="0" src="images/status_0.png">';
+			echo '<img class="cUpd'.$s1.'" data-id="'.$row['lfdnr'].'" data-state="1" src="images/status_1.png">';
+			echo '<img class="cUpd'.$s3.'" data-id="'.$row['lfdnr'].'" data-state="3" src="images/status_3.png">';
+			echo '<img class="cUpd'.$s2.'" data-id="'.$row['lfdnr'].'" data-state="2" src="images/status_2.png">';
+		}
+		elseif ($mode == 2)
+		{
+			echo '<img class="cDel" data-id="'.$row['lfdnr'].'" data-state="0" src="images/delete.png">';
+		}
 		echo '</div>'; # movieIcon
 
 		echo '<div class="desc">'.$title.'</div>';
@@ -64,7 +70,7 @@ function PrintVideos($stmt)
 	$db->close();
 
 	#DEBUG#
-	echo '<script>console.log("'.$stmt.'")</script>';
+	echo '<script>console.log(\''.$stmt.'\')</script>';
 }
 
 ?>

@@ -69,6 +69,10 @@ function SetNavigation(data,status,xhr)
 	$("#mSIndex").click(function(){
 		window.open("MakeC02.php", "_blank");
 	});
+	$("#mSDup").click(function(){
+		$("#spinner").show();
+		$.post("MakeC03.php",{},SetContent);
+	});
 }
 
 function SetContent(data,status,xhr)
@@ -86,6 +90,11 @@ function SetContent(data,status,xhr)
 		$.post("UpdateStatus.php",{id:$(this).data("id"),idStatus:$(this).data("state")},CheckResult);
 		$(this).parent().children(".cUpd").each(function(){$(this).removeClass('cActive')});
 		if ($(this).data("state")) $(this).addClass('cActive');
+	});
+	$(".cDel").click(function(){
+		$("#spinner").show();
+		$.post("DeleteVideo.php",{id:$(this).data("id")},CheckResult);
+		$(this).hide();
 	});
 	$("#bTSearch").click(function(){
 		$("#spinner").show();

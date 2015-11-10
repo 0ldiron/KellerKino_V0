@@ -4,6 +4,7 @@ echo '<ul>';
 echo '<li id="mSSync"  >Synchronize new Movies</li>';
 echo '<li id="mSViewed">Export last viewed date</li>';
 echo '<li id="mSIndex" >Create Title Index</li>';
+echo '<li id="mSDup"   >List Duplicates</li>';
 echo '</ul>';
 echo '</div>';
 ?>
