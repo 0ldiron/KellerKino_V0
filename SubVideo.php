@@ -1,5 +1,7 @@
 <?php
-
+# $mode 0: Keine Buttons
+#       1: Status Buttons
+#       2: Delete Button
 function PrintVideos($stmt, $mode)
 {
 	$db = new SQLite3('videoworld.sqlite');
