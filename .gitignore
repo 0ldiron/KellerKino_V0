@@ -5,3 +5,5 @@
 fonts_work/*.*
 images_work/*.*
 php_work/*.*
+php_work/wrd-scroll/wrd-scroll/*.*
+*.zip

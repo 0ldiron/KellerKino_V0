@@ -156,10 +156,10 @@ div.imgWrapper div.inner {
 	}
 
 #overlay {
-	top: 50px;
+	top: 0;
 	left: 0;
 	right: 0;
-	bottom: 150px;
+	bottom: 0;
 	background: #3f3f3f;
 	position: fixed;
 	opacity: 0.8;
