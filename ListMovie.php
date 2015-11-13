@@ -12,6 +12,10 @@ elseif ($_POST['cTitle'] <> '')
 {
 	$sql_stmt = 'SELECT movie.*, files.lastPlayed AS lastPlayed FROM movie JOIN files ON files.idFile=movie.idFile WHERE c02 LIKE \''.$_POST['cTitle'].'%\' ORDER BY c02';;
 }
+elseif ($_POST['idRating'] <> '')
+{
+	$sql_stmt = 'SELECT * FROM movie WHERE c05 LIKE \''.$_POST['idRating'].'%\' ORDER BY c02';
+}
 elseif (strcasecmp($_POST['cDate'],'Played') == 0)
 {
 	$sql_stmt = 'SELECT * FROM movie_view ORDER BY lastPlayed DESC';;

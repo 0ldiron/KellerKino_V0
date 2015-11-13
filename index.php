@@ -36,6 +36,7 @@
 					<li id="mXTitle">Title</li>
 					<li id="mXGenre">Genre</li>
 					<li id="mXTag"  >Tag</li>
+					<li id="mXRating">Rating</li>
 					<li id="mXService" style="font-family: 'icon-worksregular';">&#245;</li>
 				</ul>
 			</div>
@@ -47,5 +48,6 @@
 				<img border="0" id="startimg" src="images/vorhang2.jpg">
 			</div>
 		</div> 
+		<div id="overlay" style="display: none;"></div>
 </body>
 </html>

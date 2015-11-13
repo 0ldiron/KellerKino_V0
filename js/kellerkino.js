@@ -25,6 +25,7 @@ function ResetMenu(item)
 	$("#mXTitle").text("Title").removeClass('selected');
 	$("#mXGenre").text("Genre").removeClass('selected');
 	$("#mXTag"  ).text("Tag").removeClass('selected');
+	$("#mXRating").text("Rating").removeClass('selected');
 	$("#mXService").removeClass('selected');
 	item.addClass('selected');
 }
@@ -52,6 +53,11 @@ function SetNavigation(data,status,xhr)
 		$("#mXTag").text($(this).text());
 		$("#spinner").show();
 		$.post("ListMovie.php",{idTag:$(this).data("id")},SetContent);
+	});
+	$(".cXRating").click(function(){
+		$("#mXRating").text($(this).text());
+		$("#spinner").show();
+		$.post("ListMovie.php",{idRating:$(this).data("rating")},SetContent);
 	});
 	$(".cStatus").click(function(){
 		$("#mTStatus").text($(this).text());
@@ -96,6 +102,10 @@ function SetContent(data,status,xhr)
 		$.post("DeleteVideo.php",{id:$(this).data("id")},CheckResult);
 		$(this).hide();
 	});
+	$(".moviePoster").click(function(){
+		$("#overlay").show();
+		$.post("ShowVideo.php",{id:55},SetOverlay);
+	});
 	$("#bTSearch").click(function(){
 		$("#spinner").show();
 		$.post("SearchTMDB.php",{cTitle:$("#cTSearch").val()},SetContent);
@@ -107,6 +117,12 @@ function SetContent(data,status,xhr)
     }
     });
 }
+
+function SetOverlay(data,status,xhr)
+{
+	$('#overlay').html(data);
+}
+
 
 function CheckResult(data,status,xhr)
 {
@@ -170,6 +186,10 @@ $(document).ready(function(){
 	});
 	$("#mXTag").click(function(){
 		$.post("MenuTag.php",{},SetNavigation);
+		ResetMenu($(this));
+	});
+	$("#mXRating").click(function(){
+		$.post("MenuXRating.php",{},SetNavigation);
 		ResetMenu($(this));
 	});
 	$("#mXService").click(function(){
